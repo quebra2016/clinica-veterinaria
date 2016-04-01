@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo.coneccion;
+package Modelo.conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,7 @@ import java.sql.DriverManager;
  *
  * @author Capacitaciones
  */
-public class Coneccion {
+public class Conexion {
     protected static Connection cnn;
     protected static void conectar (){
         try {

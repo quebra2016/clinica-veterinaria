@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo.entidades.vo;
+package Modelo.vo;
 
 /**
  *
  * @author Capacitaciones
  */
-public class TipoMascota {
+public class TipoMascotaVo {
     private int idTipoMascota;
     private String nombre;
     private boolean estado;

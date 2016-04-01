@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo.entidades.vo;
+package Modelo.vo;
 
 import java.sql.Date;
 
@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author Capacitaciones
  */
-public class Historia {
+public class HistoriaVo {
     private int idHistoria;
     private Date fechaApertura;
     private Date fechaCierre;

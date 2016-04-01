@@ -3,32 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo.entidades.vo;
+package Modelo.vo;
 
 /**
  *
  * @author Capacitaciones
  */
-public class Medico {
-    private int idMedico;
+public class ClienteVo {
+    private int idCliente;
     private String nombre;
     private String correo;
-    private String  documento; 
-    private String tarjetaProfesional;
+    private String telefono;
     private boolean estado;
 
     /**
-     * @return the idMedico
+     * @return the idCliente
      */
-    public int getIdMedico() {
-        return idMedico;
+    public int getIdCliente() {
+        return idCliente;
     }
 
     /**
-     * @param idMedico the idMedico to set
+     * @param idCliente the idCliente to set
      */
-    public void setIdMedico(int idMedico) {
-        this.idMedico = idMedico;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     /**
@@ -60,31 +59,17 @@ public class Medico {
     }
 
     /**
-     * @return the documento
+     * @return the telefono
      */
-    public String getDocumento() {
-        return documento;
+    public String getTelefono() {
+        return telefono;
     }
 
     /**
-     * @param documento the documento to set
+     * @param telefono the telefono to set
      */
-    public void setDocumento(String documento) {
-        this.documento = documento;
-    }
-
-    /**
-     * @return the tarjetaProfesional
-     */
-    public String getTarjetaProfesional() {
-        return tarjetaProfesional;
-    }
-
-    /**
-     * @param tarjetaProfesional the tarjetaProfesional to set
-     */
-    public void setTarjetaProfesional(String tarjetaProfesional) {
-        this.tarjetaProfesional = tarjetaProfesional;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     /**
@@ -101,4 +86,5 @@ public class Medico {
         this.estado = estado;
     }
     
+
 }
