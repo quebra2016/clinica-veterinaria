@@ -10,6 +10,7 @@ import Modelo.vo.ClienteVo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class ClienteDao extends Conexion implements GenericoDao<ClienteVo> {
         PreparedStatement sentencia = null;
         try {
             conectar();
-            String sql = "insert into cliente(nombre, edad, estado, id_tipo_mascota, id_cliente) values(?,?,?,?,?)";
+            String sql = "insert into cliente(nombre, correo, telefono, estado) values(?,?,?,?)";
             sentencia = cnn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             sentencia.setString(1, object.getNombre());
             sentencia.setString(2, object.getCorreo());
@@ -45,72 +46,92 @@ public class ClienteDao extends Conexion implements GenericoDao<ClienteVo> {
 
     @Override
     public void editar(ClienteVo object) {
-         PreparedStatement sentencia;
-        try {
-            conectar ();
-            //crear el string del sql de la actualizcion
-            String sql ="update mascota set id_cliente=?, nombre=?, edad=?, estado=?, id_tipo_mascota=?, id_tipo_cliente=?";
-            sentencia = cnn.prepareStatement(sql);
-            sentencia.setInt(1, object.getIdMascota());
-            sentencia.setString(2, object.getNombre());
-            sentencia.setInt(3, object.getEdad());
-            sentencia.setBoolean(4, object.isEstado());
-            sentencia.setInt(5, object.getIdMascota());
-            sentencia.setInt(6, object.getIdCliente());
-            sentencia.setInt(7, object.getIdMascota());
-            //ejecutar la sentencia
-            sentencia.executeUpdate();
-        }catch (Exception e) {
-            e.printStackTrace(System.err);
-        }finally {
-            desconectar ();
-        }
-              
-    }
-
-    @Override
-    public List<MascotaVo> consultar() {
         PreparedStatement sentencia;
-        List<MascotaVo> lista= new ArrayList<>();
         try {
             conectar();
-         //consulta de todos los registros de la tabla
-            String sql ="select * from mascota";
+            //crear el string del sql de la actualizcion
+            String sql = "update cliente set id_cliente=?, nombre=?, correo=?, telefono=?, estado=? where id_cliente=?";
             sentencia = cnn.prepareStatement(sql);
-            //obtener los registros de la tabla.
-            ResultSet rs=sentencia.executeQuery();
-            while (rs.next()) {                
-                MascotaVo mascota= new MascotaVo();
-                //obtener el id de la mascota del cursor
-                //asih¡gnarlo el atributo idMascota de un objeto de lña clase MascotaVo
-                mascota.setIdMascota (rs.getInt("id_mascota"));
-                mascota.setNombre(rs.getString("nombre"));
-                mascota.setEdad(rs.getInt("edad"));
-                mascota.setEstado(rs.getBoolean("estado"));
-                mascota.setIdTipoMascota(rs.getInt("id_tipo_mascota"));
-                mascota.setIdCliente(rs.getInt("id_cliente"));
-                lista.add(mascota);  
-            }
+            sentencia.setInt(1, object.getIdCliente());
+            sentencia.setString(2, object.getNombre());
+            sentencia.setString(3, object.getCorreo());
+            sentencia.setString(4, object.getTelefono());
+            sentencia.setBoolean(5, object.isEstado());
+            sentencia.setInt(6, object.getIdCliente());
+            //ejecutar la sentencia
+            sentencia.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.err);
-       
-        }finally
-        {
-        
+        } finally {
+            desconectar();
         }
-        return lista;
-    }
 
     }
 
     @Override
     public List<ClienteVo> consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement sentencia;
+        List<ClienteVo> lista = new ArrayList<>();
+        try {
+            conectar();
+            //consulta de todos los registros de la tabla
+            String sql = "select * from cliente";
+            sentencia = cnn.prepareStatement(sql);
+            //obtener los registros de la tabla.
+            ResultSet rs = sentencia.executeQuery();
+            while (rs.next()) {
+                ClienteVo cliente = new ClienteVo();
+                //obtener el id de la mascota del cursor
+                //asih¡gnarlo el atributo idMascota de un objeto de lña clase MascotaVo
+                cliente.setIdCliente(rs.getInt("id_cliente"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setCorreo(rs.getString("correo"));
+                cliente.setTelefono(rs.getString("telefono"));
+                cliente.setEstado(rs.getBoolean("estado"));
+
+                lista.add(cliente);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+
+        } finally {
+            desconectar();
+        }
+        return lista;
     }
 
     @Override
     public ClienteVo consultar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement sentencia;
+        ClienteVo obj = new ClienteVo();
+        try {
+            conectar();
+            //consulta de un registro de la tabla segun la llave primaria
+            String sql = "select * from cliente where id_cliente = ?";
+            sentencia = cnn.prepareStatement(sql);
+            sentencia.setInt(1, id);
+            //obtener los registros de la tabla.
+            ResultSet rs = sentencia.executeQuery();
+            if (rs.next()) {
+                //obtener el id de la mascota del cursor
+                //asih¡gnarlo el atributo idCliente de un objeto de lña clase ClienteVo
+
+                obj.setIdCliente(rs.getInt("id_cliente"));
+                obj.setNombre(rs.getString("nombre"));
+                obj.setCorreo(rs.getString("correo"));
+                obj.setTelefono(rs.getString("telefono"));
+                obj.setEstado(rs.getBoolean("estado"));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+
+        } finally {
+                
+            desconectar();
+        }
+        return obj;
     }
 
 }
