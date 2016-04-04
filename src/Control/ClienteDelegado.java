@@ -5,7 +5,12 @@
  */
 package Control;
 
+import Modelo.dao.MascotaDao;
+import Modelo.vo.MascotaVo;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,5 +18,5 @@ import javax.swing.JFrame;
  */
 public class ClienteDelegado {
     
-
+   private final JFrame contenedor;
 }
