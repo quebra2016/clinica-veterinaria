@@ -114,7 +114,7 @@ public class ClienteDao extends Conexion implements GenericoDao<ClienteVo> {
             ResultSet rs = sentencia.executeQuery();
             if (rs.next()) {
                 //obtener el id de la mascota del cursor
-                //asih¡gnarlo el atributo idCliente de un objeto de lña clase ClienteVo
+                //asignarlo el atributo idCliente de un objeto de lña clase ClienteVo
 
                 obj.setIdCliente(rs.getInt("id_cliente"));
                 obj.setNombre(rs.getString("nombre"));
