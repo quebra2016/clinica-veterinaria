@@ -47,7 +47,7 @@ public class TipoMascotaPanel extends javax.swing.JPanel {
              Object [] fila = new Object[3];
              fila[0] = tipoMascotaVo.getIdTipoMascota();
              fila[1] = tipoMascotaVo.getNombre();
-             fila[2] = tipoMascotaVo.
+             fila[2] = tipoMascotaVo.getisEstado();
                     
          }
      }
