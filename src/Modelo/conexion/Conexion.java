@@ -15,11 +15,10 @@ import java.sql.DriverManager;
 public class Conexion {
     protected static Connection cnn;
     protected static void conectar (){
-        try {
+        try { 
         Class.forName("com.mysql.jdbc.Driver"); 
-        cnn = DriverManager.getConnection("jdbc:mysql//169.254.43.21:33.6/veterinaria", 
-                "root", 
-                "");
+        cnn = DriverManager.getConnection("jdbc:mysql//192.168.7.199:3306", "root",""); 
+                        
         } catch (Exception e){
        e.printStackTrace(System.err);
        }
