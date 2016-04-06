@@ -5,8 +5,8 @@
  */
 package Control;
 
-import Modelo.dao.MascotaDao;
-import Modelo.vo.MascotaVo;
+import Modelo.dao.MedicoDao;
+import Modelo.vo.MedicoVo;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,49 +16,51 @@ import javax.swing.JPanel;
  *
  * @author Capacitaciones
  */
-public class MascotaDelegado {
+public class MedicoDelegado {
     private final JPanel contenedor;
-    private final MascotaDao mascotaDao;
+    private final MedicoDao medicoDao;
 
-    public MascotaDelegado(JPanel contenedor) {
+    public MedicoDelegado(JPanel contenedor, MedicoDao medicoDao) {
         this.contenedor = contenedor;
-        this.mascotaDao = new MascotaDao();
+        this.medicoDao = medicoDao;
     }
-    public void insertarMascota (MascotaVo mascotaVo){
+    public void insertarMedico (MedicoVo medicoVo){
         try {
-            this.mascotaDao.insertar(mascotaVo);
+            this.medicoDao.insertar(medicoVo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(contenedor, e.getMessage(), "error en insercion", JOptionPane.ERROR_MESSAGE);
             
         }
        
     }
-    public void editarMascota(MascotaVo mascotaVo){
+    public void editarMedico(MedicoVo medicoVo){
         try {
-            this.mascotaDao.editar(mascotaVo);
+            this.medicoDao.editar(medicoVo);
         } catch (Exception e) {
            JOptionPane.showMessageDialog(contenedor, e.getMessage(), "error en insercion", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public List<MascotaVo> consultarmascota(){
-        List<MascotaVo> listaMascotas;
+    public List<MedicoVo> consultarmedico(){
+        List<MedicoVo> listaMedicos;
         try {
-            listaMascotas = this.mascotaDao.consultar();
+            listaMedicos = this.medicoDao.consultar();
         } catch (Exception e) {
-            listaMascotas = new ArrayList<>();
+            listaMedicos = new ArrayList<>();
             JOptionPane.showMessageDialog(contenedor, e.getMessage(), "error en insercion", JOptionPane.ERROR_MESSAGE);
         }
-        return listaMascotas;
+        return listaMedicos;
     }
-    public MascotaVo consultaMascota(int id){
-        MascotaVo mascotaVo;
+    public MedicoVo consultaMedico(int id){
+        MedicoVo medicoVo;
         try {
-            mascotaVo = this.mascotaDao.consultar(id);
+            medicoVo = this.medicoDao.consultar(id);
         } catch (Exception e) {
-            mascotaVo = new MascotaVo();
+            medicoVo = new MedicoVo();
             JOptionPane.showMessageDialog(contenedor, e.getMessage(), "error en insercion", JOptionPane.ERROR_MESSAGE);
         }
-         return mascotaVo;
+         return medicoVo;
     
     }
 }
+
+

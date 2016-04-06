@@ -6,6 +6,7 @@
 package Modelo.dao;
 
 import Modelo.conexion.Conexion;
+import Modelo.vo.HistoriaVo;
 import Modelo.vo.MedicoVo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -123,5 +124,13 @@ public class MedicoDao extends Conexion implements GenericoDao<MedicoVo>{
             desconectar();
         }
         return obj;
+    }
+
+    public void insertar(HistoriaVo historiaVo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void editar(HistoriaVo historiaVo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -34,7 +34,7 @@ public class TipoMascotaDelegado {
         }
        
     }
-    public void editarMascota(TipoMascotaVo tipomascotaVo){
+    public void editarTipoMascota(TipoMascotaVo tipomascotaVo){
         try {
             this.tipomascotaDao.editar(tipomascotaVo);
         } catch (Exception e) {

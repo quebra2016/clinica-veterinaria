@@ -28,7 +28,7 @@ public class TipoMascotaDao extends Conexion implements GenericoDao<TipoMascotaV
         try {
             conectar();
          //Crear consulta de insercion
-            String sql = "insert into tipo_mascota(nombre, estado) values(?, ?;)";
+            String sql = "insert into tipo_mascota(nombre, estado) values(?, ?)";
             sentencia = cnn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             sentencia.setString(1, object.getNombre());
             sentencia.setBoolean(2, object.isEstado());
