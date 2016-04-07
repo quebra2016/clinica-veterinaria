@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Vista.paneles.MascotaPanel;
 import Vista.paneles.TipoMascotaPanel;
 
 /**
@@ -22,6 +23,7 @@ public class Ventana extends javax.swing.JFrame {
     }
      private void agregarPestanas(){
          tabVentana.add("Tipo Mascota", new TipoMascotaPanel());
+         tabVentana.add("Mascota", new MascotaPanel());
          
      }
     /**

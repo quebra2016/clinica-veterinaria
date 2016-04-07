@@ -6,15 +6,13 @@
 package Modelo.dao;
 
 import Modelo.conexion.Conexion;
-import Modelo.vo.ClienteVo;
+
 import Modelo.vo.TipoMascotaVo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.spi.DirStateFactory;
-import javax.xml.transform.Result;
 
 /**
  *
@@ -53,11 +51,12 @@ public class TipoMascotaDao extends Conexion implements GenericoDao<TipoMascotaV
             conectar();
             //crear el string del sql de la actualizcion
             String sql = "update tipo_mascota set id_tipo_mascota=?, nombre=?, estado=? where id_tipo_mascota=?";
-            sentencia =cnn.prepareStatement(sql);
             sentencia = cnn.prepareStatement(sql);
             sentencia.setInt(1, object.getIdTipoMascota());
             sentencia.setString(2, object.getNombre());
             sentencia.setBoolean(3, object.isEstado());
+            sentencia.setInt(4, object.getIdTipoMascota());
+            //ejecutar la actualizacion
             sentencia.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.err);

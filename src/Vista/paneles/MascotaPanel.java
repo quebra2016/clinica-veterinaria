@@ -5,19 +5,51 @@
  */
 package Vista.paneles;
 
+import Control.ClienteDelegado;
+import Control.TipoMascotaDelegado;
+import Modelo.vo.ClienteVo;
+import Modelo.vo.TipoMascotaVo;
+import java.util.List;
+
 /**
  *
  * @author Capacitaciones
  */
 public class MascotaPanel extends javax.swing.JPanel {
+    /*
+    lista que ontiene los tipos de mascotas  existentes en la BD
+    */
+    private List<TipoMascotaVo> listatipoMascota;
+    
+    //lista que contiene los clientes 
+    private List<ClienteVo> listaClientes;
+    
 
     /**
      * Creates new form MascotaPanel
      */
     public MascotaPanel() {
         initComponents();
+        this.listatipoMascota = new TipoMascotaDelegado(this).consultartipomascota();
+        this.listaClientes = new ClienteDelegado(this).consultarcliente();
+        configurarCombos();
     }
-
+    private void configurarCombos (){
+        cboTipoMascota.addItem("Seleccione un tipo mascota");
+        cboCliente.addItem("Selecciones un cliente");
+        for (TipoMascotaVo tipoMascotaVo : listatipoMascota){
+            cboTipoMascota.addItem(tipoMascotaVo.getNombre());
+        } 
+        for (ClienteVo clienteVo : listaClientes){
+            cboCliente.addItem(clienteVo.getNombre());
+        }
+    }
+    
+    private int obtenerIdTipoMascotaComobo(){
+        int idSeleccionado = cboTipoMascota.getSelectedIndex();
+        int idTipoMascota = listatipoMascota.get(idSeleccionado-1).getIdTipoMascota();
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,9 +98,6 @@ public class MascotaPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblMascota);
 
-        cboTipoMascota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboClienteActionPerformed(evt);

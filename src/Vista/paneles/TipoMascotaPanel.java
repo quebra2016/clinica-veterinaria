@@ -34,12 +34,19 @@ public class TipoMascotaPanel extends javax.swing.JPanel {
         //asignar el nombre del tipo de mascota
         tipoMascotaVo.setNombre(txtNombre.getText());
         tipoMascotaVo.setEstado(cbxEstado.isSelected());
-        new TipoMascotaDelegado(this).insertarTipoMascota(tipoMascotaVo);
+       //validar si el id d ela constante es mayor a 0
+        if (tipoMascotaVo.getIdTipoMascota()< 1) {
+           // se crea un nuevo registro tipo_mascota 
+           new TipoMascotaDelegado(this).insertarTipoMascota(tipoMascotaVo);
+        } else {
+            new TipoMascotaDelegado(this).editarTipoMascota(tipoMascotaVo);
+        }
+        
         //mensaje e confirmacion de registro
         JOptionPane.showMessageDialog(this, "Tipo de mascota Registrado", "Registro de datos",JOptionPane.INFORMATION_MESSAGE);
         refrescartabla();
         limpiarCampos();
-       
+        limpiarConstante();
     }
     // permite estblecer los parametros iniciales de una tabla
      private void configurarTabla (){
@@ -67,7 +74,7 @@ public class TipoMascotaPanel extends javax.swing.JPanel {
          tblTipoMascota.updateUI();
      }
      /*
-     *Actauliza la informacion de la tabla con cada ves que se realiza
+     *Actualiza la informacion de la tabla cada ves que se realiza
      *un registro 
      */
           private void refrescartabla(){
@@ -78,6 +85,18 @@ public class TipoMascotaPanel extends javax.swing.JPanel {
           private void limpiarCampos(){
               txtNombre.setText("");
               cbxEstado.setSelected(false);
+          }
+          /**
+           * reinicia los valores de la constante que se usan para insertar o catulizar 
+           * un registrop d ela tabla tipo mascota
+           */
+          private void limpiarConstante(){
+              //limpiar el id del tipo de mascota
+              tipoMascotaVo.setIdTipoMascota(0);
+              //limpiar el nombre de la mascota
+              tipoMascotaVo.setNombre("");
+              //limpiar el estado tipo de mascota
+              tipoMascotaVo.setEstado(false);
           }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -179,14 +198,30 @@ public class TipoMascotaPanel extends javax.swing.JPanel {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         this.registrarTipoMascota();
     }//GEN-LAST:event_btnGuardarActionPerformed
+    //escuchador de bventos para la seleccion de las filas d euna tabla
+    //permite obtener el id de un registro  de la tabla con datos de la BD
+    //con el fin de realizar el trabajo de edicion de un registro
+    //para ello se usa un objeto que represente un objeto de la tabla de la base de datos (vo)
+    //para luego enviar dichos datos como parte de los parametros de la actualizacion
     ListSelectionListener tableListener= new ListSelectionListener() {
          @Override
          public void valueChanged(ListSelectionEvent e) {
             if (tblTipoMascota.getSelectedRow()> - 1){
                 //se obtiene el id da fila seleccionada en la tabla
+                //int id --> variable que gfuarad el id tipomascota de la fila selecccionana
+                //(int) -->casteo del objeto que se obtien al seleccionar una fila de la tbala de lainterfaz
+                //grafica del usuario "se castea a un dato de tipo "int"
+                //tbltiopomascota,getvalueAt --> metodo que permite obteber el dato de una celda  de la tabla
+                //segun dos parametros "(fila, columna)" este metodo retorna un objeto de la clase object.
+                
+                //tblTipoMascota,getSelectedRow() --> metodo que retorna el numero de la fila 
+                //sobre la cual se ha realizado una seleccion  con el mouse.
+                
+                //0 --> representa el indice de la columna seleccionada, siempre es 0 porque se toma 
+                //como referencia  la primera columna de la tabla 
                 int id = (int) tblTipoMascota.getValueAt(tblTipoMascota.getSelectedRow(), 0);
                 //consultar en la BD por ese id seleccionado y gauradr el
-                //resulatado de la consulta en un nuevo objecvt de tipoMascotaVo
+                //resultado de la consulta en un nuevo objecvt de tipoMascotaVo
                 TipoMascotaVo tMvo = new TipoMascotaDelegado(TipoMascotaPanel.this).consultaTipoMascota(id);
                 //asignar los valiores obtenidos de la consulta a la constante
                 tipoMascotaVo.setIdTipoMascota(tMvo.getIdTipoMascota());
